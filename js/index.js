@@ -1,4 +1,3 @@
-// Sample product data (Prices in South African Rands)
 const products = [
     {
         id: 1,
