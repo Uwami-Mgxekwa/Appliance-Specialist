@@ -1,55 +1,55 @@
 const products = [
     {
         id: 1,
-        category: 'phones',
-        title: 'iPhone 13 Pro',
-        description: 'Excellent condition, 256GB, unlocked',
-        price: 'R12,999',
-        image: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=400&h=300&fit=crop'
-    },
-    {
-        id: 2,
-        category: 'laptops',
-        title: 'MacBook Air M2',
-        description: 'Like new, 16GB RAM, 512GB SSD',
-        price: 'R19,999',
-        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop'
-    },
-    {
-        id: 3,
-        category: 'appliances',
+        category: 'cooling',
         title: 'Samsung Refrigerator',
         description: 'French door, stainless steel, energy efficient',
         price: 'R16,499',
         image: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=300&fit=crop'
     },
     {
+        id: 2,
+        category: 'cooling',
+        title: 'LG Air Conditioner',
+        description: '12000 BTU, inverter technology, energy saving',
+        price: 'R8,999',
+        image: 'https://images.unsplash.com/photo-1631545806609-c2b999c8f4c6?w=400&h=300&fit=crop'
+    },
+    {
+        id: 3,
+        category: 'kitchen',
+        title: 'Defy 4-Plate Stove',
+        description: 'Electric hob, oven with grill, stainless steel',
+        price: 'R4,999',
+        image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop'
+    },
+    {
         id: 4,
-        category: 'tvs',
-        title: 'LG 55" OLED TV',
-        description: '4K, HDR, smart TV features',
-        price: 'R23,999',
-        image: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400&h=300&fit=crop'
+        category: 'kitchen',
+        title: 'Russell Hobbs Kettle',
+        description: '1.7L capacity, rapid boil, auto shut-off',
+        price: 'R599',
+        image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=300&fit=crop'
     },
     {
         id: 5,
-        category: 'phones',
-        title: 'Samsung Galaxy S23',
-        description: '128GB, excellent camera, fast charging',
-        price: 'R10,999',
-        image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=300&fit=crop'
+        category: 'kitchen',
+        title: 'KitchenAid Mixer',
+        description: 'Professional grade, multiple attachments',
+        price: 'R6,499',
+        image: 'https://images.unsplash.com/photo-1578269174936-2709b6aeb913?w=400&h=300&fit=crop'
     },
     {
         id: 6,
-        category: 'laptops',
-        title: 'Dell XPS 15',
-        description: 'High performance, 32GB RAM, 1TB SSD',
-        price: 'R27,499',
-        image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=300&fit=crop'
+        category: 'laundry',
+        title: 'Samsung Washing Machine',
+        description: '8kg front loader, eco bubble technology',
+        price: 'R12,999',
+        image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop'
     },
     {
         id: 7,
-        category: 'appliances',
+        category: 'cleaning',
         title: 'Dyson Vacuum V15',
         description: 'Cordless, powerful suction, laser detection',
         price: 'R9,999',
@@ -57,19 +57,27 @@ const products = [
     },
     {
         id: 8,
-        category: 'appliances',
-        title: 'KitchenAid Mixer',
-        description: 'Professional grade, multiple attachments',
-        price: 'R6,499',
-        image: 'https://images.unsplash.com/photo-1578269174936-2709b6aeb913?w=400&h=300&fit=crop'
+        category: 'kitchen',
+        title: 'Smeg Microwave',
+        description: '25L capacity, convection, stainless steel',
+        price: 'R3,499',
+        image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&h=300&fit=crop'
     },
     {
         id: 9,
-        category: 'tvs',
-        title: 'Sony 65" LED TV',
-        description: '4K UHD, smart features, gaming mode',
-        price: 'R14,799',
-        image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=300&fit=crop'
+        category: 'cooling',
+        title: 'Chest Freezer',
+        description: '200L capacity, energy efficient, lock included',
+        price: 'R5,799',
+        image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'
+    },
+    {
+        id: 10,
+        category: 'laundry',
+        title: 'Tumble Dryer',
+        description: '7kg capacity, sensor dry, multiple programs',
+        price: 'R7,999',
+        image: 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?w=400&h=300&fit=crop'
     }
 ];
 
@@ -97,13 +105,13 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -114,22 +122,22 @@ const filterButtons = document.querySelectorAll('.filter-btn');
 // Function to render products
 function renderProducts(category = 'all') {
     productsGrid.innerHTML = '';
-    
-    const filteredProducts = category === 'all' 
-        ? products 
+
+    const filteredProducts = category === 'all'
+        ? products
         : products.filter(product => product.category === category);
-    
+
     if (filteredProducts.length === 0) {
         productsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: var(--text-light);">No products found in this category.</p>';
         return;
     }
-    
+
     filteredProducts.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.setAttribute('role', 'article');
         productCard.setAttribute('aria-label', product.title);
-        
+
         productCard.innerHTML = `
             <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
             <div class="product-info">
@@ -142,7 +150,7 @@ function renderProducts(category = 'all') {
                 </button>
             </div>
         `;
-        
+
         productsGrid.appendChild(productCard);
     });
 }
@@ -150,7 +158,7 @@ function renderProducts(category = 'all') {
 // Function to handle product contact
 function contactAboutProduct(productTitle) {
     const message = encodeURIComponent(`Hi! I'm interested in the ${productTitle}. Can you provide more details?`);
-    const whatsappNumber = '+27785002274'; // Replace with actual WhatsApp number
+    const whatsappNumber = '+27657244664'; // Replace with actual WhatsApp number
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
 }
 
@@ -159,10 +167,10 @@ filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Remove active class from all buttons
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        
+
         // Add active class to clicked button
         button.classList.add('active');
-        
+
         // Get category and render products
         const category = button.getAttribute('data-category');
         renderProducts(category);
@@ -177,7 +185,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        
+
         if (target) {
             const offsetTop = target.offsetTop - 70; // Account for fixed navbar
             window.scrollTo({
