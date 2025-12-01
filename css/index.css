@@ -548,6 +548,22 @@ body {
     color: rgba(255, 255, 255, 0.6);
 }
 
+.footer-bottom p {
+    margin: 0.5rem 0;
+}
+
+.brelinx-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.brelinx-link:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {

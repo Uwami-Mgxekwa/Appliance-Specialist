@@ -701,6 +701,33 @@ body {
     border-top: 2px solid var(--border-color);
 }
 
+/* Footer */
+.admin-footer {
+    background-color: var(--white);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.admin-footer p {
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+}
+
+.admin-footer .brelinx-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.admin-footer .brelinx-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .controls-section {
