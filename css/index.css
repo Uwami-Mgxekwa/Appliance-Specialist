@@ -123,17 +123,119 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Urgent Service Banner */
+.urgent-banner {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: var(--white);
+    padding: 1rem 0;
+    position: sticky;
+    top: 70px;
+    z-index: 999;
+    box-shadow: var(--shadow);
+}
+
+.urgent-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.urgent-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.urgent-icon i {
+    width: 24px;
+    height: 24px;
+}
+
+.urgent-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.urgent-text strong {
+    font-size: 1.1rem;
+}
+
+.urgent-text span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.urgent-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--white);
+    color: #ef4444;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.urgent-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.urgent-btn i {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(rgba(37, 99, 235, 0.85), rgba(30, 64, 175, 0.85)), 
+                url('../assets/hero.jpg') center/cover no-repeat;
     color: var(--white);
-    padding: 100px 20px;
+    padding: 120px 20px;
     text-align: center;
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(30, 64, 175, 0.8) 100%);
+    z-index: 1;
 }
 
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title {
