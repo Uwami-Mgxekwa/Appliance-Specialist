@@ -6,7 +6,7 @@
 // Configuration
 const CONFIG = {
     // Default credentials (in production, use secure backend authentication)
-    defaultUsername: 'admin',
+    defaultUsername: 'prince',
     defaultPassword: 'admin123',
     sessionDuration: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
     adminPageUrl: 'admin.html'
@@ -303,9 +303,6 @@ function saveCredentials(username) {
     }
 }
 
-/**
- * Load saved credentials
- */
 function loadSavedCredentials() {
     try {
         const savedUsername = localStorage.getItem('savedUsername');
