@@ -60,14 +60,14 @@
   </p>
 
   ### 🌟 Our Services:
-  - 🌐 Web Development
-  - 📱 Mobile App Development
-  - 💼 E-commerce Solutions
-  - 🎨 UI/UX Design
-  - 🔧 IT Consulting
-  - 🚀 Digital Marketing
-  - ☁️ Cloud Solutions
-  - 🔒 Cybersecurity
+  -🌐 Web Development
+  -📱 Mobile App Development
+  -💼 E-commerce Solutions
+  -🎨 UI/UX Design
+  -🔧 IT Consulting
+  -🚀 Digital Marketing
+  -☁️ Cloud Solutions
+  -🔒 Cybersecurity
 
   <p>
     <a href="https://brelinx.com" target="_blank">
