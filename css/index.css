@@ -764,9 +764,9 @@ body {
         height: 50px;
     }
 
-    .whatsapp-float i {
-        width: 28px;
-        height: 28px;
+    .whatsapp-float svg {
+        width: 30px;
+        height: 30px;
     }
 
     .chatbot-toggle {
@@ -882,6 +882,13 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
+    height: 100%;
+    min-height: 400px;
+}
+
+.location-map iframe {
+    height: 100% !important;
+    min-height: 400px;
 }
 
 /* Floating WhatsApp Button */
@@ -908,9 +915,9 @@ body {
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 
-.whatsapp-float i {
-    width: 32px;
-    height: 32px;
+.whatsapp-float svg {
+    width: 36px;
+    height: 36px;
 }
 
 /* Chatbot Widget */
