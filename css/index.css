@@ -266,7 +266,7 @@ body {
 .hero {
     background: linear-gradient(rgba(37, 99, 235, 0.4), rgba(30, 64, 175, 0.5)), 
                 url('../assets/hero.jpg') center/cover no-repeat;
-    color: var(--white);
+    color: #ffffff;
     padding: 120px 20px;
     text-align: center;
     position: relative;
@@ -283,6 +283,14 @@ body {
     bottom: 0;
     background: linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(30, 64, 175, 0.4) 100%);
     z-index: 1;
+}
+
+[data-theme="dark"] .hero {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .hero-overlay {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.7) 0%, rgba(31, 41, 55, 0.8) 100%);
 }
 
 .hero-content {
@@ -643,9 +651,14 @@ body {
 
 /* Footer */
 .footer {
-    background-color: var(--text-dark);
-    color: var(--white);
+    background-color: #1f2937;
+    color: #ffffff;
     padding: 3rem 20px 1rem;
+}
+
+[data-theme="dark"] .footer {
+    background-color: #0f172a;
+    color: #ffffff;
 }
 
 .footer-content {
@@ -662,6 +675,13 @@ body {
 
 .footer-section p {
     color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .footer-section h4,
+[data-theme="dark"] .footer-section p,
+[data-theme="dark"] .footer-links a,
+[data-theme="dark"] .footer-bottom {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-links {
