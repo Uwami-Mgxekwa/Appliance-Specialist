@@ -289,8 +289,101 @@ document.addEventListener('keydown', (e) => {
 const currentYear = new Date().getFullYear();
 const copyrightElements = document.querySelectorAll('.footer-bottom p');
 if (copyrightElements.length > 0) {
-    copyrightElements[0].textContent = `© ${currentYear} Appliance Specialist. All rights reserved.`;
+    copyrightElements[0].textContent = `© ${currentYear} King David & Sons Appliances. All rights reserved.`;
 }
+
+// Chatbot functionality
+const chatbotToggle = document.getElementById('chatbotToggle');
+const chatbotWidget = document.getElementById('chatbotWidget');
+const chatbotClose = document.getElementById('chatbotClose');
+const chatbotBody = document.getElementById('chatbotBody');
+const chatbotOptions = document.querySelectorAll('.chatbot-option');
+
+// Toggle chatbot
+if (chatbotToggle) {
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWidget.classList.toggle('active');
+        // Reinitialize icons when chatbot opens
+        if (chatbotWidget.classList.contains('active')) {
+            setTimeout(() => lucide.createIcons(), 100);
+        }
+    });
+}
+
+// Close chatbot
+if (chatbotClose) {
+    chatbotClose.addEventListener('click', () => {
+        chatbotWidget.classList.remove('active');
+    });
+}
+
+// Chatbot responses
+const chatbotResponses = {
+    repair: {
+        message: "We offer professional repair services for all household appliances including fridges, stoves, kettles, air conditioners, and washing machines. Our certified technicians provide fast, affordable repairs with quality parts and warranties.",
+        action: () => {
+            document.querySelector('#services').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => chatbotWidget.classList.remove('active'), 1000);
+        }
+    },
+    products: {
+        message: "Browse our selection of quality-tested household appliances. All products come with guarantees for your peace of mind. Check out our products section below!",
+        action: () => {
+            document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => chatbotWidget.classList.remove('active'), 1000);
+        }
+    },
+    hours: {
+        message: "📅 Business Hours:\n\nMonday - Friday: 8:00 AM - 6:00 PM\nSaturday: 9:00 AM - 4:00 PM\nSunday: Closed\n\n🚨 24/7 Emergency service available for urgent repairs!",
+        action: null
+    },
+    location: {
+        message: "📍 Visit us at:\n\n79 Andrew Street\nRosettenville\nJohannesburg, South Africa\n\nWe're here to serve you!",
+        action: () => {
+            document.querySelector('#location').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => chatbotWidget.classList.remove('active'), 1000);
+        }
+    },
+    contact: {
+        message: "📞 Contact us:\n\nPhone: +27 65 724 4664\nWhatsApp: Click the green button\nEmail: info@appliancespecialist.com\n\nWe're here to help!",
+        action: () => {
+            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => chatbotWidget.classList.remove('active'), 1000);
+        }
+    }
+};
+
+// Handle chatbot option clicks
+chatbotOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const response = option.getAttribute('data-response');
+        const responseData = chatbotResponses[response];
+        
+        if (responseData) {
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chatbot-message user-message';
+            userMessage.innerHTML = `<p>${option.querySelector('span').textContent}</p>`;
+            chatbotBody.appendChild(userMessage);
+            
+            // Add bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chatbot-message bot-message';
+                botMessage.innerHTML = `<p>${responseData.message.replace(/\n/g, '<br>')}</p>`;
+                chatbotBody.appendChild(botMessage);
+                
+                // Scroll to bottom
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+                
+                // Execute action if available
+                if (responseData.action) {
+                    setTimeout(responseData.action, 1500);
+                }
+            }, 500);
+        }
+    });
+});
 
 // Performance: Lazy loading for images
 if ('loading' in HTMLImageElement.prototype) {
