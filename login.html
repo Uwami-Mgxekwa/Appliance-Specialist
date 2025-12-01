@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - King David & Sons Appliances</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="icon" type="image/png" href="./assets/icon-logo.jpg">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo Section -->
+            <div class="login-header">
+                <img src="./assets/icon-logo.jpg" alt="Logo" class="login-logo">
+                <h1>Admin Login</h1>
+                <p>King David & Sons Appliances</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">
+                        <i data-lucide="user"></i>
+                        Username
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i data-lucide="lock"></i>
+                        Password
+                    </label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" id="togglePassword" class="toggle-password" aria-label="Toggle password visibility">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message hidden">
+                    <i data-lucide="alert-circle"></i>
+                    <span id="errorText"></span>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <i data-lucide="log-in"></i>
+                    <span>Sign In</span>
+                </button>
+
+                <!-- Biometric Login (if supported) -->
+                <div id="biometricSection" class="biometric-section hidden">
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    <button type="button" id="biometricBtn" class="btn btn-biometric">
+                        <i data-lucide="fingerprint"></i>
+                        <span>Sign in with Biometrics</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div class="login-footer">
+                <p>
+                    <i data-lucide="shield-check"></i>
+                    Secure login protected by encryption
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/login.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

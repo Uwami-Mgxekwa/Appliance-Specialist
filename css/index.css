@@ -242,8 +242,21 @@ body {
 }
 
 .service-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 16px;
+    color: var(--white);
+}
+
+.service-icon i {
+    width: 36px;
+    height: 36px;
+    stroke-width: 2;
 }
 
 .service-card h3 {
@@ -399,8 +412,21 @@ body {
 }
 
 .contact-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+    border-radius: 50%;
+    color: var(--primary-color);
+}
+
+.contact-icon i {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2;
 }
 
 .contact-card h3 {

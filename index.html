@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" type="image/png" href="./assets/icon-logo.jpg">
     <link rel="apple-touch-icon" href="./assets/icon-logo.jpg">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -52,17 +54,23 @@
             <p class="section-subtitle">Trust, speed, and affordability in everything we do</p>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🔧</div>
+                    <div class="service-icon">
+                        <i data-lucide="wrench"></i>
+                    </div>
                     <h3>Repair</h3>
                     <p>Fast, affordable repairs by certified technicians. We fix fridges, stoves, kettles, air conditioners, washing machines, and all household appliances with quality parts and warranties.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🛍️</div>
+                    <div class="service-icon">
+                        <i data-lucide="shopping-bag"></i>
+                    </div>
                     <h3>Sell</h3>
                     <p>Browse our selection of top brand household appliances. All appliances are quality-tested and come with guarantees for your peace of mind.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">💰</div>
+                    <div class="service-icon">
+                        <i data-lucide="dollar-sign"></i>
+                    </div>
                     <h3>Buy</h3>
                     <p>Trade in your old appliances for fair prices. Get instant quotes and quick payment. We buy fridges, stoves, washing machines, and all household appliances.</p>
                 </div>
@@ -94,7 +102,9 @@
             <p class="section-subtitle">We're here to help with all your appliance needs</p>
             <div class="contact-grid">
                 <div class="contact-card">
-                    <div class="contact-icon">📱</div>
+                    <div class="contact-icon">
+                        <i data-lucide="message-circle"></i>
+                    </div>
                     <h3>WhatsApp</h3>
                     <p>Chat with us instantly</p>
                     <a href="https://wa.me/+27657244664" target="_blank" rel="noopener noreferrer" class="contact-link whatsapp-link" title="Click to chat with us on WhatsApp">
@@ -102,13 +112,17 @@
                     </a>
                 </div>
                 <div class="contact-card">
-                    <div class="contact-icon">📧</div>
+                    <div class="contact-icon">
+                        <i data-lucide="mail"></i>
+                    </div>
                     <h3>Email</h3>
                     <p>Send us a message</p>
                     <a href="mailto:info@appliancespecialist.com" class="contact-link">info@appliancespecialist.com</a>
                 </div>
                 <div class="contact-card">
-                    <div class="contact-icon">📞</div>
+                    <div class="contact-icon">
+                        <i data-lucide="phone"></i>
+                    </div>
                     <h3>Phone</h3>
                     <p>Call us today</p>
                     <a href="tel:+27657244664" class="contact-link">+27 65 724 4664</a>
@@ -163,5 +177,9 @@
     </footer>
 
     <script src="./js/index.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
