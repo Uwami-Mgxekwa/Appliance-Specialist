@@ -32,7 +32,25 @@ const soldProductsEl = document.getElementById('soldProducts');
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     setupEventListeners();
+    setupLogout();
 });
+
+// Setup Logout Functionality
+function setupLogout() {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear session
+                localStorage.removeItem('adminSession');
+                sessionStorage.removeItem('adminLoggedIn');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+    }
+}
 
 // Setup Event Listeners
 function setupEventListeners() {
