@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Test - King David & Sons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        .btn.secondary {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        
+        .btn.secondary:hover {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .info-box {
+            background: #f9fafb;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .info-box p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ef4444;
+            font-size: 0.9rem;
+        }
+        
+        .device-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        ul {
+            margin-left: 1.5rem;
+            color: #6b7280;
+        }
+        
+        ul li {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Biometric Authentication Test</h1>
+        
+        <div class="grid">
+            <!-- Device Detection -->
+            <div class="card">
+                <h2>📱 Your Device</h2>
+                <div class="device-icon" id="deviceIcon">🖥️</div>
+                <div id="deviceInfo"></div>
+                <button class="btn" onclick="detectDevice()">Detect My Device</button>
+            </div>
+            
+            <!-- Browser Support -->
+            <div class="card">
+                <h2>🌐 Browser Support</h2>
+                <div id="browserSupport"></div>
+                <button class="btn" onclick="checkBrowserSupport()">Check Browser</button>
+            </div>
+            
+            <!-- Biometric Availability -->
+            <div class="card">
+                <h2>👆 Biometric Status</h2>
+                <div id="biometricStatus"></div>
+                <button class="btn" onclick="checkBiometric()">Check Biometric</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🎯 What You Should See</h2>
+            
+            <div class="info-box">
+                <h3>On Windows Laptop/Desktop:</h3>
+                <p>Button text: <code>Sign in with Windows Hello</code></p>
+                <p>Help text: "Use fingerprint, face recognition, or PIN"</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>On MacBook:</h3>
+                <p>Button text: <code>Sign in with Touch ID</code></p>
+                <p>Help text: "Use your fingerprint to sign in"</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>On iPhone/iPad:</h3>
+                <p>Button text: <code>Sign in with Face ID / Touch ID</code></p>
+                <p>Help text: "Use Face ID or Touch ID to sign in"</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>On Android Phone:</h3>
+                <p>Button text: <code>Sign in with Fingerprint</code></p>
+                <p>Help text: "Use your fingerprint to sign in"</p>
+            </div>
+            
+            <a href="login.html" class="btn">Go to Login Page</a>
+            <a href="test-login.html" class="btn secondary">Back to Test Page</a>
+        </div>
+        
+        <div class="card">
+            <h2>📚 Quick Reference</h2>
+            <ul>
+                <li><strong>First time?</strong> Login with password once (admin/admin123)</li>
+                <li><strong>Check "Remember Me"</strong> to enable biometric</li>
+                <li><strong>Next visit:</strong> Use biometric button for instant login</li>
+                <li><strong>Not working?</strong> Check device settings and browser support</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function detectDevice() {
+            const deviceInfo = document.getElementById('deviceInfo');
+            const deviceIcon = document.getElementById('deviceIcon');
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = navigator.platform.toLowerCase();
+            
+            let device = 'Unknown Device';
+            let icon = '🖥️';
+            let statusClass = 'info';
+            
+            if (platform.includes('win')) {
+                device = 'Windows PC/Laptop';
+                icon = '💻';
+                statusClass = 'success';
+            } else if (platform.includes('mac')) {
+                device = 'MacBook/iMac';
+                icon = '💻';
+                statusClass = 'success';
+            } else if (/iphone|ipad|ipod/.test(userAgent)) {
+                device = 'iPhone/iPad';
+                icon = '📱';
+                statusClass = 'success';
+            } else if (/android/.test(userAgent)) {
+                device = 'Android Device';
+                icon = '📱';
+                statusClass = 'success';
+            }
+            
+            deviceIcon.textContent = icon;
+            deviceInfo.innerHTML = `
+                <div class="status ${statusClass}">
+                    <strong>Device:</strong> ${device}
+                </div>
+                <div class="status info">
+                    <strong>Platform:</strong> ${navigator.platform}
+                </div>
+                <div class="status info">
+                    <strong>User Agent:</strong> ${navigator.userAgent.substring(0, 50)}...
+                </div>
+            `;
+        }
+        
+        function checkBrowserSupport() {
+            const browserSupport = document.getElementById('browserSupport');
+            const isChrome = /chrome|chromium|crios/i.test(navigator.userAgent);
+            const isEdge = /edg/i.test(navigator.userAgent);
+            const isSafari = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+            const isFirefox = /firefox/i.test(navigator.userAgent);
+            
+            let browser = 'Unknown Browser';
+            let supported = false;
+            
+            if (isEdge) {
+                browser = 'Microsoft Edge';
+                supported = true;
+            } else if (isChrome) {
+                browser = 'Google Chrome';
+                supported = true;
+            } else if (isSafari) {
+                browser = 'Safari';
+                supported = true;
+            } else if (isFirefox) {
+                browser = 'Firefox';
+                supported = true;
+            }
+            
+            const hasWebAuthn = !!window.PublicKeyCredential;
+            
+            browserSupport.innerHTML = `
+                <div class="status ${supported ? 'success' : 'warning'}">
+                    <strong>Browser:</strong> ${browser}
+                </div>
+                <div class="status ${hasWebAuthn ? 'success' : 'error'}">
+                    <strong>Web Authentication API:</strong> ${hasWebAuthn ? '✅ Supported' : '❌ Not Supported'}
+                </div>
+                <div class="status info">
+                    <strong>Recommendation:</strong> ${supported ? 'Your browser is compatible!' : 'Use Chrome, Edge, or Safari for best support'}
+                </div>
+            `;
+        }
+        
+        async function checkBiometric() {
+            const biometricStatus = document.getElementById('biometricStatus');
+            
+            if (!window.PublicKeyCredential) {
+                biometricStatus.innerHTML = `
+                    <div class="status error">
+                        ❌ Web Authentication API not supported
+                    </div>
+                    <div class="status warning">
+                        Please use a modern browser (Chrome, Edge, Safari)
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+                
+                if (available) {
+                    const isRegistered = localStorage.getItem('biometricRegistered') === 'true';
+                    
+                    biometricStatus.innerHTML = `
+                        <div class="status success">
+                            ✅ Biometric authentication is available!
+                        </div>
+                        <div class="status ${isRegistered ? 'success' : 'warning'}">
+                            <strong>Registration:</strong> ${isRegistered ? '✅ Already registered' : '⚠️ Not registered yet'}
+                        </div>
+                        <div class="status info">
+                            ${isRegistered 
+                                ? 'You can use biometric login now!' 
+                                : 'Login with password once to register biometric'}
+                        </div>
+                    `;
+                } else {
+                    biometricStatus.innerHTML = `
+                        <div class="status warning">
+                            ⚠️ Biometric not available on this device
+                        </div>
+                        <div class="status info">
+                            Your device may not have biometric hardware, or it's not enabled in settings
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                biometricStatus.innerHTML = `
+                    <div class="status error">
+                        ❌ Error checking biometric support
+                    </div>
+                    <div class="status info">
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        // Auto-run checks on load
+        window.addEventListener('load', () => {
+            detectDevice();
+            checkBrowserSupport();
+            checkBiometric();
+        });
+    </script>
+</body>
+</html>
