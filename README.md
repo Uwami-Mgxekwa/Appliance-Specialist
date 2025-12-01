@@ -11,7 +11,7 @@
 
   <p>
     <a href="https://brelinx.com" target="_blank">
-      <img src="https://brelinx.com/wp-content/uploads/2024/11/cropped-Brelinx-Logo-1-192x192.png" alt="Brelinx Logo" width="80">
+      <img src="./assets/brelinx.png" alt="Brelinx Logo" width="120">
     </a>
   </p>
 
@@ -40,46 +40,15 @@
 | Mobile Safari | iOS 14+ | ✅ Full Support |
 | Chrome Mobile | Latest | ✅ Full Support |
 
----
-
-
-## 🔒 Security Features
-
-- ✅ Session-based authentication
-- ✅ Auto-logout on session expiry
-- ✅ Protected admin routes
-- ✅ Password visibility toggle
-- ✅ Remember me functionality
-- ✅ Secure credential storage
 
 ---
 
-## 📚 Documentation
-
-- **LOGIN_DOCUMENTATION.md** - Complete login system guide
-- **SETUP_GUIDE.md** - Quick setup instructions
-- **IMPLEMENTATION_SUMMARY.md** - Technical implementation details
-
----
-
-## 🚀 Deployment
-
-### For Production:
-1. ✅ Change default admin credentials
-2. ✅ Enable HTTPS
-3. ✅ Set up backend authentication API
-4. ✅ Configure CORS properly
-5. ✅ Add rate limiting
-6. ✅ Set up error logging
-7. ✅ Test on all browsers and devices
-
----
 
 ## 🤝 About Brelinx
 
 <div align="center">
   <a href="https://brelinx.com" target="_blank">
-    <img src="https://brelinx.com/wp-content/uploads/2024/11/cropped-Brelinx-Logo-1-192x192.png" alt="Brelinx Logo" width="120">
+    <img src="./assets/brelinx.png" alt="Brelinx Logo" width="150">
   </a>
 
   <h3><a href="https://brelinx.com" target="_blank">Brelinx</a></h3>
