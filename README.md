@@ -26,23 +26,6 @@
   </p>
 </div>
 
----
-
-
-## 📱 Browser Support
-
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome | 90+ | ✅ Full Support |
-| Edge | 90+ | ✅ Full Support |
-| Firefox | 88+ | ✅ Full Support |
-| Safari | 14+ | ✅ Full Support |
-| Mobile Safari | iOS 14+ | ✅ Full Support |
-| Chrome Mobile | Latest | ✅ Full Support |
-
-
----
-
 
 ## 🤝 About Brelinx
 
