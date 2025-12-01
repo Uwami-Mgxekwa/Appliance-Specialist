@@ -17,6 +17,19 @@
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Dark Mode Variables */
+[data-theme="dark"] {
+    --primary-color: #3b82f6;
+    --secondary-color: #2563eb;
+    --accent-color: #10b981;
+    --text-dark: #f9fafb;
+    --text-light: #d1d5db;
+    --bg-light: #1f2937;
+    --white: #111827;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -26,6 +39,8 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    background-color: var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -64,10 +79,49 @@ body {
     color: var(--primary-color);
 }
 
-.logo-img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-light);
+}
+
+.theme-toggle i {
+    width: 24px;
+    height: 24px;
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    display: none;
 }
 
 .nav-menu {
@@ -307,6 +361,10 @@ body {
     background-color: var(--bg-light);
 }
 
+[data-theme="dark"] .services {
+    background-color: #111827;
+}
+
 .section-title {
     text-align: center;
     font-size: 2.5rem;
@@ -335,6 +393,14 @@ body {
     box-shadow: var(--shadow);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .product-card,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .location-card {
+    background-color: #1f2937;
+    border: 1px solid #374151;
 }
 
 .service-card:hover,
@@ -680,6 +746,10 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
     .mobile-menu-toggle {
         display: flex;
     }
@@ -812,6 +882,10 @@ body {
 .location-section {
     padding: 80px 20px;
     background-color: var(--bg-light);
+}
+
+[data-theme="dark"] .location-section {
+    background-color: #111827;
 }
 
 .location-grid {
@@ -965,6 +1039,11 @@ body {
     overflow: hidden;
 }
 
+[data-theme="dark"] .chatbot-widget {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+
 .chatbot-widget.active {
     display: flex;
     animation: slideUp 0.3s ease;
@@ -1045,6 +1124,10 @@ body {
     color: var(--text-dark);
 }
 
+[data-theme="dark"] .bot-message {
+    background: #111827;
+}
+
 .user-message {
     background: var(--primary-color);
     color: var(--white);
@@ -1064,11 +1147,16 @@ body {
     gap: 0.75rem;
     padding: 1rem;
     background: var(--white);
-    border: 2px solid var(--border-color);
+    border: 2px solid #e5e7eb;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
+}
+
+[data-theme="dark"] .chatbot-option {
+    background: #111827;
+    border-color: #374151;
 }
 
 .chatbot-option:hover {
