@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - King David & Sons Appliances</title>
+    <link rel="stylesheet" href="./css/admin.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container">
+            <h1>
+                <i data-lucide="layout-dashboard"></i>
+                Admin Dashboard
+            </h1>
+            <p class="subtitle">Manage your products</p>
+        </div>
+    </header>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Controls Section -->
+        <section class="controls-section">
+            <button id="addProductBtn" class="btn btn-primary">
+                <i data-lucide="plus"></i>
+                <span>Add New Product</span>
+            </button>
+
+            <div class="filters">
+                <div class="search-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search products..." 
+                        class="search-input"
+                    >
+                </div>
+                
+                <select id="statusFilter" class="filter-select">
+                    <option value="all">All Status</option>
+                    <option value="available">Available</option>
+                    <option value="sold">Sold</option>
+                    <option value="new">New Stock</option>
+                </select>
+
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="cooling">Cooling</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="laundry">Laundry</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-lucide="package"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-value" id="totalProducts">0</div>
+                    <div class="stat-label">Total Products</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success">
+                    <i data-lucide="check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-value" id="availableProducts">0</div>
+                    <div class="stat-label">Available</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon new">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-value" id="newProducts">0</div>
+                    <div class="stat-label">New Stock</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon sold">
+                    <i data-lucide="dollar-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-value" id="soldProducts">0</div>
+                    <div class="stat-label">Sold</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Grid -->
+        <section class="products-section">
+            <h2>Products</h2>
+            <div id="productsGrid" class="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+            <div id="emptyState" class="empty-state hidden">
+                <i data-lucide="package-open"></i>
+                <p>No products found. Add your first product to get started!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Form Modal -->
+    <div id="productModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">
+                    <i data-lucide="plus-circle"></i>
+                    <span>Add New Product</span>
+                </h2>
+                <button id="closeModal" class="close-btn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <form id="productForm" class="product-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productTitle">
+                            <i data-lucide="tag"></i>
+                            Product Title *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="productTitle" 
+                            required 
+                            placeholder="e.g., Samsung Refrigerator"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productPrice">
+                            <i data-lucide="dollar-sign"></i>
+                            Price (R) *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="productPrice" 
+                            required 
+                            placeholder="e.g., 16,499"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">
+                        <i data-lucide="file-text"></i>
+                        Description *
+                    </label>
+                    <textarea 
+                        id="productDescription" 
+                        required 
+                        rows="3"
+                        placeholder="Product description..."
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productCategory">
+                            <i data-lucide="folder"></i>
+                            Category *
+                        </label>
+                        <select id="productCategory" required>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="cooling">Cooling</option>
+                            <option value="cleaning">Cleaning</option>
+                            <option value="laundry">Laundry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productQuantity">
+                            <i data-lucide="hash"></i>
+                            Quantity *
+                        </label>
+                        <input 
+                            type="number" 
+                            id="productQuantity" 
+                            required 
+                            min="0"
+                            value="1"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productStatus">
+                            <i data-lucide="activity"></i>
+                            Status *
+                        </label>
+                        <select id="productStatus" required>
+                            <option value="available">Available</option>
+                            <option value="sold">Sold</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="productIsNew">
+                        <i data-lucide="sparkles"></i>
+                        <span>Mark as New Stock</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImage">
+                        <i data-lucide="image"></i>
+                        Product Image *
+                    </label>
+                    <input 
+                        type="file" 
+                        id="productImage" 
+                        accept="image/*"
+                        class="file-input"
+                    >
+                    <div id="imagePreview" class="image-preview hidden">
+                        <img id="previewImg" src="" alt="Preview">
+                        <button type="button" id="removeImage" class="remove-image-btn">
+                            <i data-lucide="trash-2"></i>
+                            Remove Image
+                        </button>
+                    </div>
+                    <p class="help-text">
+                        <i data-lucide="info"></i>
+                        Supported: JPG, PNG, HEIC (max 5MB, auto-compressed)
+                    </p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">
+                        <i data-lucide="x"></i>
+                        <span>Cancel</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i data-lucide="save"></i>
+                        <span>Save Product</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/admin.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
