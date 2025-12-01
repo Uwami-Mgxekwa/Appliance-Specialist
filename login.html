@@ -82,8 +82,12 @@
                     </div>
                     <button type="button" id="biometricBtn" class="btn btn-biometric">
                         <i data-lucide="fingerprint"></i>
-                        <span>Sign in with Biometrics</span>
+                        <span id="biometricBtnText">Sign in with Biometrics</span>
                     </button>
+                    <p class="biometric-help">
+                        <i data-lucide="info"></i>
+                        <span id="biometricHelpText">Works with Windows Hello, Touch ID, Face ID, or Fingerprint</span>
+                    </p>
                 </div>
             </form>
 
@@ -99,7 +103,13 @@
 
     <script src="./js/login.js"></script>
     <script>
+        // Initialize Lucide icons
         lucide.createIcons();
+        
+        // Reinitialize icons after dynamic content loads
+        setTimeout(() => {
+            lucide.createIcons();
+        }, 100);
     </script>
 </body>
 </html>

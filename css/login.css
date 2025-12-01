@@ -261,6 +261,23 @@ body {
     display: none;
 }
 
+.biometric-help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.biometric-help i {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
 .divider {
     display: flex;
     align-items: center;

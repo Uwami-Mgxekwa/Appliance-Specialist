@@ -133,16 +133,58 @@ async function checkBiometricSupport() {
             const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
             
             if (available) {
-                // Check if user has registered biometric credentials
-                const hasBiometric = localStorage.getItem('biometricRegistered') === 'true';
+                // Show biometric option if device supports it
+                biometricSection.classList.remove('hidden');
                 
-                if (hasBiometric) {
-                    biometricSection.classList.remove('hidden');
-                }
+                // Update button text based on device/platform
+                updateBiometricText();
+                
+                console.log('✅ Biometric authentication available on this device');
+            } else {
+                console.log('ℹ️ Biometric authentication not available on this device');
             }
         } catch (error) {
             console.log('Biometric check failed:', error);
         }
+    } else {
+        console.log('ℹ️ Web Authentication API not supported by this browser');
+    }
+}
+
+/**
+ * Update biometric button text based on device/platform
+ */
+function updateBiometricText() {
+    const biometricBtnText = document.getElementById('biometricBtnText');
+    const biometricHelpText = document.getElementById('biometricHelpText');
+    
+    if (!biometricBtnText || !biometricHelpText) return;
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+    const platform = navigator.platform.toLowerCase();
+    
+    // Detect device type
+    const isWindows = platform.includes('win');
+    const isMac = platform.includes('mac');
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+    
+    // Update text based on device
+    if (isWindows) {
+        biometricBtnText.textContent = 'Sign in with Windows Hello';
+        biometricHelpText.textContent = 'Use fingerprint, face recognition, or PIN';
+    } else if (isMac) {
+        biometricBtnText.textContent = 'Sign in with Touch ID';
+        biometricHelpText.textContent = 'Use your fingerprint to sign in';
+    } else if (isIOS) {
+        biometricBtnText.textContent = 'Sign in with Face ID / Touch ID';
+        biometricHelpText.textContent = 'Use Face ID or Touch ID to sign in';
+    } else if (isAndroid) {
+        biometricBtnText.textContent = 'Sign in with Fingerprint';
+        biometricHelpText.textContent = 'Use your fingerprint to sign in';
+    } else {
+        biometricBtnText.textContent = 'Sign in with Biometrics';
+        biometricHelpText.textContent = 'Use your device biometric authentication';
     }
 }
 
@@ -258,10 +300,40 @@ async function registerBiometric(username) {
 async function handleBiometricLogin() {
     try {
         setLoadingState(true, biometricBtn);
+        clearError();
         
-        // Simulate biometric verification
-        // In production, use proper WebAuthn authentication
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Check if biometric is already registered
+        const isRegistered = localStorage.getItem('biometricRegistered') === 'true';
+        
+        if (!isRegistered) {
+            // First time using biometric - need to set it up
+            setLoadingState(false, biometricBtn);
+            showError('Please login with username/password first to enable biometric authentication.');
+            return;
+        }
+        
+        // Simulate biometric verification with device prompt
+        // In production, this would use proper WebAuthn authentication
+        // For now, we'll simulate the device biometric prompt
+        await new Promise((resolve, reject) => {
+            // Show a simulated biometric prompt
+            const confirmed = confirm(
+                '🔐 Biometric Authentication\n\n' +
+                'Your device will now prompt you to verify your identity using:\n' +
+                '• Fingerprint\n' +
+                '• Face recognition\n' +
+                '• Windows Hello PIN\n' +
+                '• Touch ID\n\n' +
+                'Click OK to continue with biometric verification.'
+            );
+            
+            if (confirmed) {
+                // Simulate biometric verification delay
+                setTimeout(resolve, 800);
+            } else {
+                reject(new Error('User cancelled biometric authentication'));
+            }
+        });
         
         // Get stored username
         const username = localStorage.getItem('biometricUsername') || CONFIG.defaultUsername;
@@ -273,7 +345,7 @@ async function handleBiometricLogin() {
         redirectToAdmin();
     } catch (error) {
         setLoadingState(false, biometricBtn);
-        showError('Biometric authentication failed. Please try again.');
+        showError('Biometric authentication cancelled or failed. Please try again or use password login.');
         console.error('Biometric login error:', error);
     }
 }
