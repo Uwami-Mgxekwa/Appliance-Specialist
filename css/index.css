@@ -748,8 +748,16 @@ body {
 }
 
 .brelinx-link:hover {
-    color: var(--white);
+    color: #ffffff;
     text-decoration: underline;
+}
+
+[data-theme="dark"] .brelinx-link {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .brelinx-link:hover {
+    color: #93c5fd;
 }
 
 /* Animations */
