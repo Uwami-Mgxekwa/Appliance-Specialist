@@ -11,12 +11,18 @@
 <body>
     <!-- Header -->
     <header class="admin-header">
-        <div class="container">
-            <h1>
-                <i data-lucide="layout-dashboard"></i>
-                Admin Dashboard
-            </h1>
-            <p class="subtitle">Manage your products</p>
+        <div class="container header-content">
+            <div>
+                <h1>
+                    <i data-lucide="layout-dashboard"></i>
+                    Admin Dashboard
+                </h1>
+                <p class="subtitle">Manage your products</p>
+            </div>
+            <button id="logoutBtn" class="logout-btn" title="Logout">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </button>
         </div>
     </header>
 
@@ -256,6 +262,43 @@
         </div>
     </div>
 
+    <!-- Session Protection Script (must load before admin.js) -->
+    <script>
+        // Check if user is authenticated before loading admin page
+        (function() {
+            function checkAuth() {
+                try {
+                    const sessionData = localStorage.getItem('adminSession');
+                    
+                    if (!sessionData) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    const session = JSON.parse(sessionData);
+                    const now = Date.now();
+                    
+                    // Check if session is expired
+                    if (!session.expiresAt || session.expiresAt <= now) {
+                        localStorage.removeItem('adminSession');
+                        sessionStorage.removeItem('adminLoggedIn');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Auth check error:', error);
+                    window.location.href = 'login.html';
+                }
+            }
+            
+            // Check auth immediately
+            checkAuth();
+            
+            // Check auth periodically
+            setInterval(checkAuth, 60000); // Check every minute
+        })();
+    </script>
+    
     <script src="./js/admin.js"></script>
     <script>
         // Initialize Lucide icons
