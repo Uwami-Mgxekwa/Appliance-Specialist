@@ -58,18 +58,16 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Load Products from Admin Storage
+// Load Products from Back4App
 async function loadProducts() {
     try {
-        const result = await window.storage.get('admin-products', true);
-        if (result && result.value) {
-            products = JSON.parse(result.value);
-            // Filter only available products for customers
-            products = products.filter(p => p.status === 'available' && p.quantity > 0);
-        } else {
-            // Fallback to default products if no admin products exist
+        products = await ProductService.getAvailableProducts();
+        
+        // If no products in database, show default products
+        if (products.length === 0) {
             products = getDefaultProducts();
         }
+        
         renderProducts();
     } catch (error) {
         console.error('Error loading products:', error);

@@ -72,33 +72,20 @@ function setupEventListeners() {
     });
 }
 
-// Load Products from Storage
+// Load Products from Back4App
 async function loadProducts() {
     try {
-        const result = await window.storage.get('admin-products', true);
-        if (result && result.value) {
-            products = JSON.parse(result.value);
-        } else {
-            products = [];
-        }
+        showNotification('Loading products...', 'info');
+        products = await ProductService.getAllProducts();
         updateStats();
         renderProducts();
+        showNotification('Products loaded successfully!', 'success');
     } catch (error) {
         console.error('Error loading products:', error);
+        showNotification('Error loading products. Please try again.', 'error');
         products = [];
         updateStats();
         renderProducts();
-    }
-}
-
-// Save Products to Storage
-async function saveProducts() {
-    try {
-        await window.storage.set('admin-products', JSON.stringify(products), true);
-        showNotification('Products saved successfully!', 'success');
-    } catch (error) {
-        console.error('Error saving products:', error);
-        showNotification('Error saving products. Please try again.', 'error');
     }
 }
 
@@ -226,7 +213,7 @@ async function handleFormSubmit(e) {
     }
 
     const productData = {
-        id: editingProductId || Date.now(),
+        id: editingProductId || null,
         title,
         price,
         description,
@@ -234,27 +221,25 @@ async function handleFormSubmit(e) {
         quantity,
         status,
         isNew,
-        image: image || '',
-        createdAt: editingProductId ? 
-            products.find(p => p.id === editingProductId).createdAt : 
-            new Date().toISOString()
+        image: image || ''
     };
 
-    if (editingProductId) {
-        // Update existing product
-        const index = products.findIndex(p => p.id === editingProductId);
-        products[index] = productData;
-        showNotification('Product updated successfully!', 'success');
-    } else {
-        // Add new product
-        products.unshift(productData);
-        showNotification('Product added successfully!', 'success');
-    }
+    try {
+        showNotification('Saving product...', 'info');
+        await ProductService.saveProduct(productData);
+        
+        if (editingProductId) {
+            showNotification('Product updated successfully!', 'success');
+        } else {
+            showNotification('Product added successfully!', 'success');
+        }
 
-    await saveProducts();
-    closeProductModal();
-    updateStats();
-    renderProducts();
+        closeProductModal();
+        await loadProducts();
+    } catch (error) {
+        console.error('Error saving product:', error);
+        showNotification('Error saving product. Please try again.', 'error');
+    }
 }
 
 // Delete Product
@@ -263,34 +248,41 @@ async function deleteProduct(productId) {
         return;
     }
 
-    products = products.filter(p => p.id !== productId);
-    await saveProducts();
-    updateStats();
-    renderProducts();
-    showNotification('Product deleted successfully!', 'success');
+    try {
+        showNotification('Deleting product...', 'info');
+        await ProductService.deleteProduct(productId);
+        showNotification('Product deleted successfully!', 'success');
+        await loadProducts();
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        showNotification('Error deleting product. Please try again.', 'error');
+    }
 }
 
 // Toggle Product Status
 async function toggleStatus(productId, newStatus) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    product.status = newStatus;
-    await saveProducts();
-    updateStats();
-    renderProducts();
-    showNotification(`Product marked as ${newStatus}!`, 'success');
+    try {
+        showNotification('Updating status...', 'info');
+        await ProductService.updateProductStatus(productId, newStatus);
+        showNotification(`Product marked as ${newStatus}!`, 'success');
+        await loadProducts();
+    } catch (error) {
+        console.error('Error updating status:', error);
+        showNotification('Error updating status. Please try again.', 'error');
+    }
 }
 
 // Toggle New Stock
 async function toggleNewStock(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    product.isNew = !product.isNew;
-    await saveProducts();
-    renderProducts();
-    showNotification(`Product ${product.isNew ? 'marked' : 'unmarked'} as new stock!`, 'success');
+    try {
+        showNotification('Updating product...', 'info');
+        const isNew = await ProductService.toggleNewStock(productId);
+        showNotification(`Product ${isNew ? 'marked' : 'unmarked'} as new stock!`, 'success');
+        await loadProducts();
+    } catch (error) {
+        console.error('Error toggling new stock:', error);
+        showNotification('Error updating product. Please try again.', 'error');
+    }
 }
 
 // Update Statistics

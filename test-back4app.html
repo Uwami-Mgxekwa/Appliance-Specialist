@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back4App Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .loading { color: #3b82f6; }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>🧪 Back4App Connection Test</h1>
+        <p>This page tests your Back4App connection and database operations.</p>
+        
+        <div>
+            <button onclick="testConnection()">1. Test Connection</button>
+            <button onclick="testCreateProduct()">2. Create Test Product</button>
+            <button onclick="testGetProducts()">3. Get All Products</button>
+            <button onclick="testDeleteAll()">4. Clear Test Data</button>
+        </div>
+        
+        <div id="results"></div>
+    </div>
+
+    <!-- Parse SDK -->
+    <script src="https://npmcdn.com/parse@3.4.4/dist/parse.min.js"></script>
+    <script src="./js/back4app-config.js"></script>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'success' ? 'success' : type === 'error' ? 'error' : 'loading';
+            resultsDiv.innerHTML += `<div class="${color}">[${timestamp}] ${message}</div>`;
+        }
+
+        async function testConnection() {
+            resultsDiv.innerHTML = '';
+            log('Testing Back4App connection...', 'loading');
+            
+            try {
+                const TestObject = Parse.Object.extend('TestConnection');
+                const testObject = new TestObject();
+                testObject.set('message', 'Hello from your appliance store!');
+                testObject.set('timestamp', new Date());
+                
+                await testObject.save();
+                log('✅ Connection successful! Back4App is working.', 'success');
+                log(`Test object created with ID: ${testObject.id}`, 'success');
+                
+                // Clean up test object
+                await testObject.destroy();
+                log('Test object cleaned up.', 'success');
+            } catch (error) {
+                log(`❌ Connection failed: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function testCreateProduct() {
+            resultsDiv.innerHTML = '';
+            log('Creating test product...', 'loading');
+            
+            try {
+                const productData = {
+                    title: 'Test Samsung Fridge',
+                    price: '15,999',
+                    description: 'This is a test product',
+                    category: 'cooling',
+                    quantity: 5,
+                    status: 'available',
+                    isNew: true,
+                    image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='
+                };
+                
+                const product = await ProductService.saveProduct(productData);
+                log('✅ Test product created successfully!', 'success');
+                log(`Product ID: ${product.id}`, 'success');
+                log('You can now view this in your admin dashboard!', 'success');
+            } catch (error) {
+                log(`❌ Failed to create product: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function testGetProducts() {
+            resultsDiv.innerHTML = '';
+            log('Fetching all products...', 'loading');
+            
+            try {
+                const products = await ProductService.getAllProducts();
+                log(`✅ Found ${products.length} product(s)`, 'success');
+                
+                if (products.length > 0) {
+                    log('\nProducts:', 'success');
+                    products.forEach((p, i) => {
+                        log(`${i + 1}. ${p.title} - R${p.price} (${p.status})`, 'info');
+                    });
+                } else {
+                    log('No products found. Try creating a test product first.', 'info');
+                }
+            } catch (error) {
+                log(`❌ Failed to fetch products: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function testDeleteAll() {
+            if (!confirm('This will delete ALL test products. Continue?')) {
+                return;
+            }
+            
+            resultsDiv.innerHTML = '';
+            log('Deleting all products...', 'loading');
+            
+            try {
+                const products = await ProductService.getAllProducts();
+                
+                for (const product of products) {
+                    await ProductService.deleteProduct(product.id);
+                    log(`Deleted: ${product.title}`, 'info');
+                }
+                
+                log(`✅ Deleted ${products.length} product(s)`, 'success');
+            } catch (error) {
+                log(`❌ Failed to delete products: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
