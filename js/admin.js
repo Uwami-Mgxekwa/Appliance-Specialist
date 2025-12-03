@@ -358,23 +358,23 @@ function renderProducts(productsToRender = products) {
                     <div class="product-quantity">Qty: ${product.quantity}</div>
                 </div>
                 <div class="product-actions">
-                    <button class="action-btn edit-btn" onclick="openEditModal(${product.id})">
+                    <button class="action-btn edit-btn" onclick="openEditModal('${product.id}')">
                         <i data-lucide="edit-2"></i>
                         Edit
                     </button>
-                    <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
+                    <button class="action-btn delete-btn" onclick="deleteProduct('${product.id}')">
                         <i data-lucide="trash-2"></i>
                         Delete
                     </button>
                 </div>
                 <div class="product-actions" style="margin-top: 0.5rem;">
                     <button class="action-btn ${product.status === 'sold' ? 'btn-success' : 'btn-danger'}" 
-                            onclick="toggleStatus(${product.id}, '${product.status === 'sold' ? 'available' : 'sold'}')">
+                            onclick="toggleStatus('${product.id}', '${product.status === 'sold' ? 'available' : 'sold'}')">
                         <i data-lucide="${product.status === 'sold' ? 'package' : 'dollar-sign'}"></i>
                         ${product.status === 'sold' ? 'Mark Available' : 'Mark Sold'}
                     </button>
                     <button class="action-btn ${product.isNew ? 'btn-success' : 'btn-secondary'}" 
-                            onclick="toggleNewStock(${product.id})">
+                            onclick="toggleNewStock('${product.id}')">
                         <i data-lucide="sparkles"></i>
                         ${product.isNew ? 'Unmark New' : 'Mark New'}
                     </button>
