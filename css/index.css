@@ -911,34 +911,15 @@ body {
     background-color: #111827;
 }
 
-.location-grid {
+.location-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
     margin-top: 3rem;
 }
 
-.location-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Mobile-first approach for location */
-@media (max-width: 768px) {
-    .location-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .location-info {
-        order: 1;
-    }
-    
-    .location-map {
-        order: 2;
-        margin-top: 1rem;
-    }
+.location-map {
+    margin-top: 3rem;
 }
 
 .location-card {
