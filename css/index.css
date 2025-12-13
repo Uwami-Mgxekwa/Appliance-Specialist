@@ -850,11 +850,6 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .location-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
     .whatsapp-float {
         bottom: 90px;
         right: 20px;
