@@ -929,6 +929,23 @@ body {
     gap: 1.5rem;
 }
 
+/* Mobile-first approach for location */
+@media (max-width: 768px) {
+    .location-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .location-info {
+        order: 1;
+    }
+    
+    .location-map {
+        order: 2;
+        margin-top: 1rem;
+    }
+}
+
 .location-card {
     background: var(--white);
     padding: 2rem;
